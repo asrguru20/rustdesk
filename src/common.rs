@@ -2461,6 +2461,13 @@ pub fn rustdesk_interval(i: Interval) -> ThrottledInterval {
 }
 
 pub fn load_custom_client() {
+    if let Some(lang) = option_env!("RS_DEFAULT_LANG") {
+        config::DEFAULT_LOCAL_SETTINGS
+            .write()
+            .unwrap()
+            .entry("lang".to_owned())
+            .or_insert_with(|| lang.to_owned());
+    }
     #[cfg(debug_assertions)]
     if let Ok(data) = std::fs::read_to_string("./custom.txt") {
         read_custom_client(data.trim());
