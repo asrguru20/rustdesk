@@ -38,7 +38,7 @@ class SettingsPage extends StatefulWidget implements PageShape {
   State<SettingsPage> createState() => _SettingsState();
 }
 
-const url = 'https://rustdesk.com/';
+const url = 'https://interlan.app/';
 
 enum KeepScreenOn {
   never,
@@ -1050,7 +1050,7 @@ class _SettingsState extends State<SettingsPage> with WidgetsBindingObserver {
                 title: Text(translate("Version: ") + version),
                 value: Padding(
                   padding: EdgeInsets.symmetric(vertical: 8),
-                  child: Text('rustdesk.com',
+                  child: Text('interlan.app',
                       style: TextStyle(
                         decoration: TextDecoration.underline,
                       )),
@@ -1081,10 +1081,28 @@ class _SettingsState extends State<SettingsPage> with WidgetsBindingObserver {
                 ),
                 leading: Icon(Icons.perm_identity)),
             SettingsTile(
-              title: Text(translate("Privacy Statement")),
+              title: Text('info@interlan.app'),
               onPressed: (context) =>
-                  launchUrlString('https://rustdesk.com/privacy.html'),
-              leading: Icon(Icons.privacy_tip),
+                  launchUrlString('mailto:info@interlan.app'),
+              leading: Icon(Icons.email),
+            ),
+            SettingsTile(
+              title: Text('021-82802399'),
+              onPressed: (context) => launchUrlString('tel:+982182802399'),
+              leading: Icon(Icons.phone),
+            ),
+            SettingsTile(
+              title: Text('instagram.com/interlan_'),
+              onPressed: (context) =>
+                  launchUrlString('https://instagram.com/interlan_'),
+              leading: Icon(Icons.camera_alt),
+            ),
+            SettingsTile(
+              title: Text('Based on RustDesk (AGPL-3.0)'),
+              value: Text('github.com/asrguru20/rustdesk'),
+              onPressed: (context) =>
+                  launchUrlString('https://github.com/asrguru20/rustdesk'),
+              leading: Icon(Icons.code),
             )
           ],
         ),
@@ -1196,12 +1214,12 @@ void showAbout(OverlayDialogManager dialogManager) {
         Text('Version: $version'),
         InkWell(
             onTap: () async {
-              const url = 'https://rustdesk.com/';
+              const url = 'https://interlan.app/';
               await launchUrl(Uri.parse(url));
             },
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 8),
-              child: Text('rustdesk.com',
+              child: Text('interlan.app',
                   style: TextStyle(
                     decoration: TextDecoration.underline,
                   )),

@@ -524,7 +524,7 @@ class _GeneralState extends State<_General> {
   Widget other() {
     final incomingOnly = bind.isIncomingOnly();
     final outgoingOnly = bind.isOutgoingOnly();
-    final showAutoUpdate = (isWindows && bind.mainIsInstalled()) ||
+    final showAutoUpdate = (isWindows && bind.mainIsInstalled() && !bind.isCustomClient()) ||
     (isMacOS && bind.mainIsInstalled() && bind.mainIsInstalledDaemon(prompt: false) && !bind.isCustomClient());
     final children = <Widget>[
       if (!isWeb && !incomingOnly)
@@ -2596,22 +2596,38 @@ class _AboutState extends State<_About> {
                       .marginSymmetric(vertical: 4.0)),
               InkWell(
                   onTap: () {
-                    launchUrlString('https://rustdesk.com/privacy.html');
+                    launchUrlString('https://interlan.app');
                   },
                   child: Text(
-                    translate('Privacy Statement'),
+                    'interlan.app',
                     style: linkStyle,
                   ).marginSymmetric(vertical: 4.0)),
               InkWell(
                   onTap: () {
-                    launchUrlString('https://rustdesk.com');
+                    launchUrlString('mailto:info@interlan.app');
                   },
                   child: Text(
-                    translate('Website'),
+                    'info@interlan.app',
+                    style: linkStyle,
+                  ).marginSymmetric(vertical: 4.0)),
+              InkWell(
+                  onTap: () {
+                    launchUrlString('tel:+982182802399');
+                  },
+                  child: Text(
+                    '021-82802399',
+                    style: linkStyle,
+                  ).marginSymmetric(vertical: 4.0)),
+              InkWell(
+                  onTap: () {
+                    launchUrlString('https://instagram.com/interlan_');
+                  },
+                  child: Text(
+                    'instagram.com/interlan_',
                     style: linkStyle,
                   ).marginSymmetric(vertical: 4.0)),
               Container(
-                decoration: const BoxDecoration(color: Color(0xFF2c8cff)),
+                decoration: BoxDecoration(color: MyTheme.accent),
                 padding:
                     const EdgeInsets.symmetric(vertical: 24, horizontal: 8),
                 child: SelectionArea(
@@ -2622,14 +2638,16 @@ class _AboutState extends State<_About> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Copyright © ${DateTime.now().toString().substring(0, 4)} Purslane Tech Pte. Ltd.\n$license',
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                          Text(
-                            translate('Slogan_tip'),
+                            'اینترلن | آموزش آنلاین زبان کودک، نوجوان و بزرگسال',
                             style: TextStyle(
                                 fontWeight: FontWeight.w800,
                                 color: Colors.white),
+                          ),
+                          Text(
+                            'Copyright © ${DateTime.now().toString().substring(0, 4)} Interlan\n'
+                            'Based on RustDesk © Purslane Tech Pte. Ltd., licensed under AGPL-3.0\n'
+                            'Source code: https://github.com/asrguru20/rustdesk\n$license',
+                            style: const TextStyle(color: Colors.white),
                           )
                         ],
                       ),
