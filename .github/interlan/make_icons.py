@@ -45,6 +45,17 @@ SRC.save("flutter/windows/runner/resources/app_icon.ico", sizes=[(16, 16), (24, 
 SRC.resize((512, 512), Image.LANCZOS).save("flutter/assets/icon.png")
 SRC.save("flutter/assets/icon.ico", sizes=[(16, 16), (24, 24), (32, 32), (48, 48), (64, 64), (128, 128), (256, 256)])
 
+# Linux: hicolor icons shipped in the .deb (scalable.svg just wraps the PNG).
+for size, path in [(32, "res/32x32.png"), (64, "res/64x64.png"), (128, "res/128x128.png"), (256, "res/128x128@2x.png")]:
+    SRC.resize((size, size), Image.LANCZOS).save(path)
+with open("res/scalable.svg", "w", encoding="utf-8") as f:
+    import base64, io
+    buf = io.BytesIO()
+    SRC.resize((512, 512), Image.LANCZOS).save(buf, "PNG")
+    f.write('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
+            'width="512" height="512" viewBox="0 0 512 512"><image width="512" height="512" '
+            f'xlink:href="data:image/png;base64,{base64.b64encode(buf.getvalue()).decode()}"/></svg>\n')
+
 # Android launcher (legacy square + round), adaptive foreground (108dp, glyph inside the 66dp safe zone)
 # and the notification icon (white silhouette).
 white_disc = None
